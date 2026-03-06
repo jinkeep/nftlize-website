@@ -685,8 +685,9 @@
                 点击照片可以放大查看，体验流畅的3D动画效果。
             </p>
             <p style="margin-top: 20px; color: #00f2ea;">
-                <strong>✨ 新功能：</strong>点击屏幕任意位置，会触发波纹效果，
-                并随机弹出"大宝、小宝、爸爸、妈妈"四个名字，炫酷十足！
+                <strong>✨ 点击特效：</strong>点击屏幕任意位置，会触发波纹效果，
+                并随机弹出"大宝、小宝、爸爸、妈妈"中的一个名字，炫酷十足！
+                每次点击随机出现不同名字，性能优化流畅运行。
             </p>
         </div>
 
@@ -740,7 +741,7 @@
             ring.style.animationPlayState = 'running';
         });
 
-        // Click to show random names
+        // Click to show random name (performance optimized)
         const names = ['大宝', '小宝', '爸爸', '妈妈'];
         const colors = [
             'linear-gradient(135deg, #ff0080, #7928ca)',
@@ -749,8 +750,17 @@
             'linear-gradient(135deg, #00ff88, #00ffcc)'
         ];
 
+        // Performance: Limit active name bubbles
+        let activeBubbles = 0;
+        const MAX_ACTIVE_BUBBLES = 10;
+
         document.body.addEventListener('click', (e) => {
-            // Create ripple effect
+            // Performance: Skip if too many bubbles
+            if (activeBubbles >= MAX_ACTIVE_BUBBLES) {
+                return;
+            }
+
+            // Create ripple effect (optimized - use CSS animation)
             const ripple = document.createElement('div');
             ripple.className = 'ripple';
             ripple.style.left = e.clientX + 'px';
@@ -758,31 +768,33 @@
             ripple.style.transform = 'translate(-50%, -50%)';
             document.body.appendChild(ripple);
 
-            setTimeout(() => {
+            // Performance: Remove ripple after CSS animation completes
+            ripple.addEventListener('animationend', () => {
                 ripple.remove();
-            }, 1000);
+            });
 
-            // Show 4 random names around click position
-            for (let i = 0; i < 4; i++) {
-                setTimeout(() => {
-                    const name = names[Math.floor(Math.random() * names.length)];
-                    const color = colors[Math.floor(Math.random() * colors.length)];
+            // Show ONE random name around click position
+            const name = names[Math.floor(Math.random() * names.length)];
+            const color = colors[Math.floor(Math.random() * colors.length)];
+            const offsetX = (Math.random() - 0.5) * 300;
+            const offsetY = (Math.random() - 0.5) * 300;
 
-                    const nameBubble = document.createElement('div');
-                    nameBubble.className = 'name-bubble';
-                    nameBubble.textContent = name;
-                    nameBubble.style.background = color;
-                    nameBubble.style.left = (e.clientX + (Math.random() - 0.5) * 400) + 'px';
-                    nameBubble.style.top = (e.clientY + (Math.random() - 0.5) * 400) + 'px';
-                    nameBubble.style.fontSize = (20 + Math.random() * 15) + 'px';
+            const nameBubble = document.createElement('div');
+            nameBubble.className = 'name-bubble';
+            nameBubble.textContent = name;
+            nameBubble.style.background = color;
+            nameBubble.style.left = (e.clientX + offsetX) + 'px';
+            nameBubble.style.top = (e.clientY + offsetY) + 'px';
+            nameBubble.style.fontSize = (24 + Math.random() * 10) + 'px';
 
-                    document.body.appendChild(nameBubble);
+            document.body.appendChild(nameBubble);
+            activeBubbles++;
 
-                    setTimeout(() => {
-                        nameBubble.remove();
-                    }, 2000);
-                }, i * 150);
-            }
+            // Performance: Remove bubble after animation completes
+            nameBubble.addEventListener('animationend', () => {
+                nameBubble.remove();
+                activeBubbles--;
+            });
         });
     </script>
 </body>
