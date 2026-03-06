@@ -15,10 +15,6 @@
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
             background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
             min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
             color: #fff;
             overflow-x: hidden;
             position: relative;
@@ -59,13 +55,61 @@
             }
         }
 
-        .container {
+        /* Fireworks effect */
+        .firework {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 100;
+            opacity: 0;
+            animation: firework 2s ease-out;
+        }
+
+        @keyframes firework {
+            0% {
+                opacity: 0;
+                transform: translate(-50%, -50%) scale(0);
+            }
+            20% {
+                opacity: 1;
+                transform: translate(-50%, -50%) scale(1.5);
+            }
+            100% {
+                opacity: 0;
+                transform: translate(-50%, -50%) scale(2);
+            }
+        }
+
+        .firework-particle {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            animation: explode 2s ease-out;
+        }
+
+        @keyframes explode {
+            0% {
+                transform: translate(0, 0) scale(1);
+                opacity: 1;
+            }
+            100% {
+                transform: translate(var(--tx), var(--ty)) scale(0);
+                opacity: 0;
+            }
+        }
+
+        .main-container {
             position: relative;
             z-index: 1;
             text-align: center;
             padding: 60px 40px;
             max-width: 800px;
-            animation: fadeInUp 1s ease-out;
+            margin: 0 auto;
         }
 
         @keyframes fadeInUp {
@@ -189,22 +233,215 @@
             margin: 0 auto;
         }
 
-        .status-badge {
+        /* Celebration section */
+        .celebration-section {
+            margin: 80px 0;
+            padding: 60px 40px;
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .celebration-banner {
+            font-size: 80px;
+            margin-bottom: 30px;
+            animation: bounce 1s infinite;
             display: inline-block;
-            padding: 10px 25px;
+        }
+
+        @keyframes bounce {
+            0%, 100% {
+                transform: scale(1) rotate(0deg);
+            }
+            25% {
+                transform: scale(1.2) rotate(-5deg);
+            }
+            50% {
+                transform: scale(1) rotate(0deg);
+            }
+            75% {
+                transform: scale(1.2) rotate(5deg);
+            }
+        }
+
+        .celebration-title {
+            font-size: 48px;
+            margin-bottom: 20px;
+            font-weight: 800;
+            background: linear-gradient(90deg, #ff00ff, #00f2ea, #ffcc00, #ff00ff);
+            background-size: 300% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: gradient 3s linear infinite;
+        }
+
+        .celebration-badge {
+            display: inline-block;
+            padding: 15px 40px;
             background: linear-gradient(90deg, #00f2ea, #ff00ff);
             color: #000;
-            border-radius: 30px;
-            font-size: 16px;
+            border-radius: 50px;
+            font-size: 20px;
             font-weight: 700;
-            margin-bottom: 30px;
-            box-shadow: 0 4px 15px rgba(0, 242, 234, 0.4);
+            margin-bottom: 40px;
+            box-shadow: 0 10px 30px rgba(0, 242, 234, 0.4);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+                box-shadow: 0 10px 30px rgba(0, 242, 234, 0.4);
+            }
+            50% {
+                transform: scale(1.05);
+                box-shadow: 0 15px 40px rgba(255, 0, 255, 0.6);
+            }
+        }
+
+        .photo-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin: 60px 0;
+            perspective: 1000px;
+        }
+
+        .photo-card {
+            position: relative;
+            border-radius: 20px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: all 0.5s ease;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+            animation: cardAppear 0.8s ease-out;
+            animation-fill-mode: both;
+        }
+
+        .photo-card:nth-child(1) {
+            animation-delay: 0.2s;
+        }
+
+        .photo-card:nth-child(2) {
+            animation-delay: 0.4s;
+        }
+
+        .photo-card:nth-child(3) {
+            animation-delay: 0.6s;
+        }
+
+        .photo-card:nth-child(4) {
+            animation-delay: 0.8s;
+        }
+
+        @keyframes cardAppear {
+            from {
+                opacity: 0;
+                transform: translateY(50px) rotateX(90deg);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) rotateX(0deg);
+            }
+        }
+
+        .photo-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 30px 60px rgba(0, 242, 234, 0.5);
+        }
+
+        .photo-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+            min-height: 250px;
+        }
+
+        .photo-card:hover img {
+            transform: scale(1.1);
+        }
+
+        .photo-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.9), transparent);
+            padding: 30px 20px 20px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .photo-card:hover .photo-overlay {
+            opacity: 1;
+        }
+
+        .photo-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #00f2ea;
+            margin-bottom: 5px;
+        }
+
+        .photo-desc {
+            font-size: 14px;
+            color: #e0e0e0;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            margin: 60px 0;
+        }
+
+        .stat {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 30px;
+            transition: all 0.3s ease;
+        }
+
+        .stat:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .stat-value {
+            font-size: 48px;
+            font-weight: 800;
+            background: linear-gradient(90deg, #00f2ea, #ff00ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 10px;
+        }
+
+        .stat-label {
+            font-size: 14px;
+            color: #a0a0a0;
         }
 
         .footer {
-            margin-top: 60px;
+            margin-top: 80px;
             font-size: 14px;
             color: #606060;
+            padding-bottom: 40px;
+            text-align: center;
+        }
+
+        .footer a {
+            color: #00f2ea;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer a:hover {
+            color: #ff00ff;
         }
 
         @media (max-width: 768px) {
@@ -217,11 +454,19 @@
             .logo {
                 font-size: 60px;
             }
-            .container {
+            .main-container,
+            .celebration-section {
                 padding: 40px 20px;
             }
-            .cards {
+            .cards,
+            .photo-gallery {
                 grid-template-columns: 1fr;
+            }
+            .celebration-title {
+                font-size: 32px;
+            }
+            .celebration-banner {
+                font-size: 60px;
             }
         }
     </style>
@@ -229,8 +474,7 @@
 <body>
     <div class="background-particles" id="particles"></div>
 
-    <div class="container">
-        <div class="status-badge">✨ 一切皆可NFT</div>
+    <div class="main-container">
         <span class="logo">🎨</span>
         <h1>NFTlize.com</h1>
         <p class="tagline">将你的创意数字化、唯一化、价值化</p>
@@ -274,17 +518,75 @@
                 NFT（非同质化代币）正在重新定义数字资产的所有权。通过区块链技术，任何数字内容都可以被铸造成独一无二的代币，拥有不可篡改的证明、可追溯的历史和透明的交易记录。无论是创作者还是收藏者，NFT都为数字世界带来了真正的价值认同。
             </p>
         </div>
+    </div>
 
-        <div class="footer">
-            <p>Powered by OpenClaw | Nginx Server</p>
-            <p>🌐 一切皆可NFT，一切皆有价值</p>
+    <!-- Celebration Section -->
+    <div class="celebration-section">
+        <div class="celebration-banner">🎉</div>
+        <h2 class="celebration-title">部署成功！</h2>
+        <div class="celebration-badge">✨ GitHub Pages 上线啦！</div>
+
+        <div class="photo-gallery">
+            <div class="photo-card">
+                <img src="images/photo1.jpg" alt="DNS配置">
+                <div class="photo-overlay">
+                    <div class="photo-title">DNS配置</div>
+                    <div class="photo-desc">GoDaddy域名管理</div>
+                </div>
+            </div>
+            <div class="photo-card">
+                <img src="images/photo2.jpg" alt="DNS记录">
+                <div class="photo-overlay">
+                    <div class="photo-title">DNS记录</div>
+                    <div class="photo-desc">CNAME配置完成</div>
+                </div>
+            </div>
+            <div class="photo-card">
+                <img src="images/photo3.jpg" alt="项目部署">
+                <div class="photo-overlay">
+                    <div class="photo-title">项目部署</div>
+                    <div class="photo-desc">GitHub仓库设置</div>
+                </div>
+            </div>
+            <div class="photo-card">
+                <img src="images/photo4.jpg" alt="最终成果">
+                <div class="photo-overlay">
+                    <div class="photo-title">最终成果</div>
+                    <div class="photo-desc">成功上线！</div>
+                </div>
+            </div>
         </div>
+
+        <div class="stats">
+            <div class="stat">
+                <div class="stat-value">100%</div>
+                <div class="stat-label">部署成功率</div>
+            </div>
+            <div class="stat">
+                <div class="stat-value">全球</div>
+                <div class="stat-label">CDN加速访问</div>
+            </div>
+            <div class="stat">
+                <div class="stat-value">免费</div>
+                <div class="stat-label">GitHub Pages托管</div>
+            </div>
+            <div class="stat">
+                <div class="stat-value">HTTPS</div>
+                <div class="stat-label">自动安全加密</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p>🌐 一切皆可NFT，一切皆有价值</p>
+        <p>访问: <a href="http://www.nftlize.com">www.nftlize.com</a></p>
+        <p>Powered by OpenClaw | GitHub Pages</p>
     </div>
 
     <script>
         // Create floating particles
         const particlesContainer = document.getElementById('particles');
-        for (let i = 0; i < 30; i++) {
+        for (let i = 0; i < 50; i++) {
             const particle = document.createElement('div');
             particle.className = 'particle';
             particle.style.left = Math.random() * 100 + '%';
@@ -295,6 +597,50 @@
             particle.style.animationDuration = Math.random() * 10 + 15 + 's';
             particlesContainer.appendChild(particle);
         }
+
+        // Create fireworks
+        function createFirework() {
+            const firework = document.createElement('div');
+            firework.className = 'firework';
+            firework.innerHTML = '';
+
+            const colors = ['#ff0000', '#00ff00', '#0000ff', '#ffff00', '#ff00ff', '#00ffff', '#ffcc00', '#ff6600'];
+            const color = colors[Math.floor(Math.random() * colors.length)];
+
+            for (let i = 0; i < 30; i++) {
+                const angle = (i / 30) * Math.PI * 2;
+                const distance = 200 + Math.random() * 200;
+                const tx = Math.cos(angle) * distance + 'px';
+                const ty = Math.sin(angle) * distance + 'px';
+
+                const particle = document.createElement('div');
+                particle.className = 'firework-particle';
+                particle.style.background = color;
+                particle.style.left = '50%';
+                particle.style.top = '50%';
+                particle.style.setProperty('--tx', tx);
+                particle.style.setProperty('--ty', ty);
+                firework.appendChild(particle);
+            }
+
+            document.body.appendChild(firework);
+
+            setTimeout(() => {
+                firework.remove();
+            }, 2000);
+        }
+
+        // Fireworks on load
+        window.addEventListener('load', () => {
+            setTimeout(() => createFirework(), 1000);
+            setTimeout(() => createFirework(), 2000);
+            setTimeout(() => createFirework(), 3000);
+        });
+
+        // Click to create firework
+        document.body.addEventListener('click', (e) => {
+            createFirework();
+        });
     </script>
 </body>
 </html>
