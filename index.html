@@ -20,6 +20,71 @@
             position: relative;
         }
 
+        /* Navigation */
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 100;
+            background: rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .nav-logo {
+            font-size: 24px;
+            font-weight: 700;
+            background: linear-gradient(90deg, #00f2ea, #ff00ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+            text-decoration: none;
+        }
+
+        .nav-logo:hover {
+            transform: scale(1.05);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-link {
+            color: #e0e0e0;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-link:hover {
+            color: #00f2ea;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #00f2ea, #ff00ff);
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
         /* Animated background */
         .background-particles {
             position: fixed;
@@ -107,7 +172,7 @@
             position: relative;
             z-index: 1;
             text-align: center;
-            padding: 60px 40px;
+            padding: 80px 40px;
             max-width: 800px;
             margin: 0 auto;
         }
@@ -468,11 +533,28 @@
             .celebration-banner {
                 font-size: 60px;
             }
+            .nav {
+                padding: 15px 20px;
+            }
+            .nav-links {
+                gap: 15px;
+            }
+            .nav-link {
+                font-size: 14px;
+            }
         }
     </style>
 </head>
 <body>
     <div class="background-particles" id="particles"></div>
+
+    <nav class="nav">
+        <a href="/" class="nav-logo">NFTlize</a>
+        <div class="nav-links">
+            <a href="/" class="nav-link">首页</a>
+            <a href="/celebration.html" class="nav-link">庆祝</a>
+        </div>
+    </nav>
 
     <div class="main-container">
         <span class="logo">🎨</span>

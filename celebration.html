@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🎉 部署成功！NFTlize.com</title>
+    <title>庆祝部署 - NFTlize.com</title>
     <style>
         * {
             margin: 0;
@@ -13,18 +13,18 @@
 
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #0f3460 100%);
+            background: radial-gradient(ellipse at center, #1a1a2e 0%, #0f0f1e 100%);
             min-height: 100vh;
+            color: #fff;
+            overflow-x: hidden;
             display: flex;
             flex-direction: column;
             align-items: center;
-            color: #fff;
-            overflow-x: hidden;
             position: relative;
         }
 
-        /* Animated background */
-        .background-particles {
+        /* Stars background */
+        .stars {
             position: fixed;
             top: 0;
             left: 0;
@@ -34,104 +34,103 @@
             z-index: 0;
         }
 
-        .particle {
+        .star {
             position: absolute;
+            background: white;
             border-radius: 50%;
-            background: rgba(255, 255, 255, 0.1);
-            animation: float 15s infinite;
+            animation: twinkle 3s infinite;
         }
 
-        @keyframes float {
+        @keyframes twinkle {
             0%, 100% {
-                transform: translateY(0) rotate(0deg);
-                opacity: 0;
+                opacity: 0.3;
             }
-            10% {
+            50% {
                 opacity: 1;
-            }
-            90% {
-                opacity: 1;
-            }
-            100% {
-                transform: translateY(-100vh) rotate(720deg);
-                opacity: 0;
             }
         }
 
-        /* Fireworks effect */
-        .firework {
+        /* Navigation */
+        .nav {
             position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
+            top: 0;
+            left: 0;
+            right: 0;
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
             z-index: 100;
-            opacity: 0;
-            animation: firework 2s ease-out;
+            background: rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
 
-        @keyframes firework {
-            0% {
-                opacity: 0;
-                transform: translate(-50%, -50%) scale(0);
-            }
-            20% {
-                opacity: 1;
-                transform: translate(-50%, -50%) scale(1.5);
-            }
-            100% {
-                opacity: 0;
-                transform: translate(-50%, -50%) scale(2);
-            }
+        .nav-logo {
+            font-size: 24px;
+            font-weight: 700;
+            background: linear-gradient(90deg, #00f2ea, #ff00ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            cursor: pointer;
+            transition: transform 0.3s ease;
         }
 
-        .firework-particle {
+        .nav-logo:hover {
+            transform: scale(1.05);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-link {
+            color: #e0e0e0;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-link:hover {
+            color: #00f2ea;
+        }
+
+        .nav-link::after {
+            content: '';
             position: absolute;
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            animation: explode 2s ease-out;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #00f2ea, #ff00ff);
+            transition: width 0.3s ease;
         }
 
-        @keyframes explode {
-            0% {
-                transform: translate(0, 0) scale(1);
-                opacity: 1;
-            }
-            100% {
-                transform: translate(var(--tx), var(--ty)) scale(0);
-                opacity: 0;
-            }
+        .nav-link:hover::after {
+            width: 100%;
         }
 
-        .container {
+        /* Main content */
+        .main-content {
             position: relative;
             z-index: 1;
             text-align: center;
-            padding: 60px 40px;
-            max-width: 1200px;
-            width: 100%;
-            animation: fadeInUp 1s ease-out;
-        }
-
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            padding-top: 100px;
+            padding-bottom: 60px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
 
         .celebration {
             font-size: 100px;
-            margin-bottom: 30px;
+            margin-bottom: 20px;
             animation: bounce 1s infinite;
-            display: inline-block;
+            display: block;
         }
 
         @keyframes bounce {
@@ -139,18 +138,18 @@
                 transform: scale(1) rotate(0deg);
             }
             25% {
-                transform: scale(1.2) rotate(-5deg);
+                transform: scale(1.3) rotate(-10deg);
             }
             50% {
                 transform: scale(1) rotate(0deg);
             }
             75% {
-                transform: scale(1.2) rotate(5deg);
+                transform: scale(1.3) rotate(10deg);
             }
         }
 
         h1 {
-            font-size: 64px;
+            font-size: 56px;
             margin-bottom: 20px;
             font-weight: 800;
             background: linear-gradient(90deg, #ff00ff, #00f2ea, #ffcc00, #ff00ff);
@@ -171,9 +170,9 @@
         }
 
         .subtitle {
-            font-size: 28px;
+            font-size: 24px;
             color: #e0e0e0;
-            margin-bottom: 20px;
+            margin-bottom: 30px;
             font-weight: 300;
             letter-spacing: 2px;
         }
@@ -184,9 +183,9 @@
             background: linear-gradient(90deg, #00f2ea, #ff00ff);
             color: #000;
             border-radius: 50px;
-            font-size: 20px;
+            font-size: 18px;
             font-weight: 700;
-            margin-bottom: 40px;
+            margin-bottom: 60px;
             box-shadow: 0 10px 30px rgba(0, 242, 234, 0.4);
             animation: pulse 2s infinite;
         }
@@ -202,116 +201,241 @@
             }
         }
 
-        .gallery {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 30px;
-            margin: 60px 0;
+        /* Rotating ring container */
+        .ring-container {
+            position: relative;
+            width: 600px;
+            height: 600px;
+            margin: 60px auto;
             perspective: 1000px;
         }
 
-        .photo-card {
-            position: relative;
-            border-radius: 20px;
-            overflow: hidden;
-            cursor: pointer;
-            transition: all 0.5s ease;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
-            animation: cardAppear 0.8s ease-out;
-            animation-fill-mode: both;
+        .ring {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            animation: rotateRing 20s linear infinite;
+            transform-style: preserve-3d;
         }
 
-        .photo-card:nth-child(1) {
-            animation-delay: 0.2s;
-        }
-
-        .photo-card:nth-child(2) {
-            animation-delay: 0.4s;
-        }
-
-        .photo-card:nth-child(3) {
-            animation-delay: 0.6s;
-        }
-
-        .photo-card:nth-child(4) {
-            animation-delay: 0.8s;
-        }
-
-        @keyframes cardAppear {
+        @keyframes rotateRing {
             from {
-                opacity: 0;
-                transform: translateY(50px) rotateX(90deg);
+                transform: rotateZ(0deg);
             }
             to {
-                opacity: 1;
-                transform: translateY(0) rotateX(0deg);
+                transform: rotateZ(360deg);
             }
         }
 
-        .photo-card:hover {
-            transform: translateY(-10px) scale(1.02);
-            box-shadow: 0 30px 60px rgba(0, 242, 234, 0.5);
+        .photo-wrapper {
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            top: 50%;
+            left: 50%;
+            transform-origin: center center;
+            cursor: pointer;
+            transition: all 0.5s ease;
         }
 
-        .photo-card img {
+        .photo-wrapper:hover {
+            transform: scale(1.3) !important;
+            z-index: 100;
+        }
+
+        .photo-wrapper:nth-child(1) {
+            transform: translate(-50%, -50%) rotate(0deg) translateY(-300px);
+            animation: floatPhoto1 20s linear infinite;
+        }
+
+        .photo-wrapper:nth-child(2) {
+            transform: translate(-50%, -50%) rotate(90deg) translateY(-300px);
+            animation: floatPhoto2 20s linear infinite;
+        }
+
+        .photo-wrapper:nth-child(3) {
+            transform: translate(-50%, -50%) rotate(180deg) translateY(-300px);
+            animation: floatPhoto3 20s linear infinite;
+        }
+
+        .photo-wrapper:nth-child(4) {
+            transform: translate(-50%, -50%) rotate(270deg) translateY(-300px);
+            animation: floatPhoto4 20s linear infinite;
+        }
+
+        @keyframes floatPhoto1 {
+            from {
+                transform: translate(-50%, -50%) rotate(0deg) translateY(-300px);
+            }
+            to {
+                transform: translate(-50%, -50%) rotate(360deg) translateY(-300px);
+            }
+        }
+
+        @keyframes floatPhoto2 {
+            from {
+                transform: translate(-50%, -50%) rotate(90deg) translateY(-300px);
+            }
+            to {
+                transform: translate(-50%, -50%) rotate(450deg) translateY(-300px);
+            }
+        }
+
+        @keyframes floatPhoto3 {
+            from {
+                transform: translate(-50%, -50%) rotate(180deg) translateY(-300px);
+            }
+            to {
+                transform: translate(-50%, -50%) rotate(540deg) translateY(-300px);
+            }
+        }
+
+        @keyframes floatPhoto4 {
+            from {
+                transform: translate(-50%, -50%) rotate(270deg) translateY(-300px);
+            }
+            to {
+                transform: translate(-50%, -50%) rotate(630deg) translateY(-300px);
+            }
+        }
+
+        .photo {
+            width: 100%;
+            height: 100%;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+            transition: all 0.3s ease;
+            border: 3px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .photo img {
             width: 100%;
             height: 100%;
             object-fit: cover;
             transition: transform 0.5s ease;
         }
 
-        .photo-card:hover img {
+        .photo-wrapper:hover .photo img {
             transform: scale(1.1);
         }
 
-        .photo-overlay {
+        .photo-wrapper:hover .photo {
+            border-color: #00f2ea;
+            box-shadow: 0 30px 60px rgba(0, 242, 234, 0.6);
+        }
+
+        /* Center content */
+        .center-content {
             position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
-            padding: 30px 20px 20px;
-            opacity: 0;
-            transition: opacity 0.3s ease;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 200px;
+            height: 200px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 50;
         }
 
-        .photo-card:hover .photo-overlay {
-            opacity: 1;
+        .center-icon {
+            font-size: 80px;
+            margin-bottom: 10px;
+            animation: centerGlow 2s infinite alternate;
         }
 
-        .photo-title {
+        @keyframes centerGlow {
+            from {
+                filter: drop-shadow(0 0 10px #00f2ea);
+            }
+            to {
+                filter: drop-shadow(0 0 30px #ff00ff);
+            }
+        }
+
+        .center-text {
             font-size: 18px;
             font-weight: 600;
             color: #00f2ea;
-            margin-bottom: 5px;
         }
 
-        .photo-desc {
-            font-size: 14px;
-            color: #e0e0e0;
+        /* Orbiting particles */
+        .orbit {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 400px;
+            height: 400px;
+            border: 2px dashed rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            animation: rotateOrbit 30s linear infinite;
         }
 
+        @keyframes rotateOrbit {
+            from {
+                transform: translate(-50%, -50%) rotate(0deg);
+            }
+            to {
+                transform: translate(-50%, -50%) rotate(360deg);
+            }
+        }
+
+        .orbit-dot {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: linear-gradient(90deg, #00f2ea, #ff00ff);
+            border-radius: 50%;
+            box-shadow: 0 0 10px #00f2ea;
+        }
+
+        .orbit-dot:nth-child(1) {
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .orbit-dot:nth-child(2) {
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .orbit-dot:nth-child(3) {
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .orbit-dot:nth-child(4) {
+            right: 0;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        /* Info section */
         .info-section {
+            max-width: 800px;
+            margin: 60px 40px;
             background: rgba(255, 255, 255, 0.05);
             backdrop-filter: blur(10px);
             border: 1px solid rgba(255, 255, 255, 0.1);
             border-radius: 20px;
             padding: 40px;
-            margin: 60px 0;
-            animation: slideIn 1s ease-out;
-            animation-delay: 1s;
-            animation-fill-mode: both;
-            opacity: 0;
+            animation: slideUp 1s ease-out;
         }
 
-        @keyframes slideIn {
+        @keyframes slideUp {
             from {
                 opacity: 0;
-                transform: translateX(-50px);
+                transform: translateY(50px);
             }
             to {
                 opacity: 1;
-                transform: translateX(0);
+                transform: translateY(0);
             }
         }
 
@@ -325,15 +449,15 @@
             font-size: 16px;
             line-height: 1.8;
             color: #d0d0d0;
-            max-width: 700px;
-            margin: 0 auto;
         }
 
+        /* Stats */
         .stats {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 30px;
-            margin: 60px 0;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            max-width: 1000px;
+            margin: 40px 40px;
         }
 
         .stat {
@@ -342,16 +466,18 @@
             border: 1px solid rgba(255, 255, 255, 0.1);
             border-radius: 15px;
             padding: 30px;
+            text-align: center;
             transition: all 0.3s ease;
         }
 
         .stat:hover {
             transform: translateY(-5px);
             background: rgba(255, 255, 255, 0.1);
+            box-shadow: 0 15px 30px rgba(0, 242, 234, 0.3);
         }
 
         .stat-value {
-            font-size: 48px;
+            font-size: 36px;
             font-weight: 800;
             background: linear-gradient(90deg, #00f2ea, #ff00ff);
             -webkit-background-clip: text;
@@ -365,11 +491,13 @@
             color: #a0a0a0;
         }
 
+        /* Footer */
         .footer {
             margin-top: 60px;
-            font-size: 16px;
+            font-size: 14px;
             color: #606060;
             padding-bottom: 40px;
+            text-align: center;
         }
 
         .footer a {
@@ -387,156 +515,166 @@
                 font-size: 36px;
             }
             .subtitle {
-                font-size: 20px;
+                font-size: 18px;
             }
             .celebration {
                 font-size: 60px;
             }
-            .gallery {
-                grid-template-columns: 1fr;
+            .ring-container {
+                width: 400px;
+                height: 400px;
             }
-            .container {
-                padding: 40px 20px;
+            .photo-wrapper {
+                width: 150px;
+                height: 150px;
             }
-            .badge {
-                padding: 10px 30px;
-                font-size: 16px;
+            .photo-wrapper:nth-child(1) {
+                transform: translate(-50%, -50%) rotate(0deg) translateY(-200px);
+            }
+            .photo-wrapper:nth-child(2) {
+                transform: translate(-50%, -50%) rotate(90deg) translateY(-200px);
+            }
+            .photo-wrapper:nth-child(3) {
+                transform: translate(-50%, -50%) rotate(180deg) translateY(-200px);
+            }
+            .photo-wrapper:nth-child(4) {
+                transform: translate(-50%, -50%) rotate(270deg) translateY(-200px);
+            }
+            .orbit {
+                width: 280px;
+                height: 280px;
+            }
+            .center-content {
+                width: 150px;
+            }
+            .stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .nav {
+                padding: 15px 20px;
+            }
+            .nav-links {
+                gap: 15px;
+            }
+            .nav-link {
+                font-size: 14px;
             }
         }
     </style>
 </head>
 <body>
-    <div class="background-particles" id="particles"></div>
+    <div class="stars" id="stars"></div>
 
-    <div class="container">
+    <nav class="nav">
+        <div class="nav-logo" onclick="location.href='/'">
+            NFTlize
+        </div>
+        <div class="nav-links">
+            <a href="/" class="nav-link">首页</a>
+            <a href="/celebration.html" class="nav-link">庆祝</a>
+        </div>
+    </nav>
+
+    <div class="main-content">
         <div class="celebration">🎉</div>
         <h1>部署成功！</h1>
-        <p class="subtitle">NFTlize.com 一切皆可NFT</p>
-        <div class="badge">✨ GitHub Pages 上线啦！</div>
+        <p class="subtitle">NFTlize.com 炫酷展示</p>
+        <div class="badge">✨ 环形旋转相册</div>
 
-        <div class="gallery">
-            <div class="photo-card">
-                <img src="images/photo1.jpg" alt="部署截图1">
-                <div class="photo-overlay">
-                    <div class="photo-title">DNS配置</div>
-                    <div class="photo-desc">GoDaddy域名管理</div>
+        <div class="ring-container">
+            <div class="ring">
+                <div class="photo-wrapper">
+                    <div class="photo">
+                        <img src="images/photo1.jpg" alt="DNS配置">
+                    </div>
+                </div>
+                <div class="photo-wrapper">
+                    <div class="photo">
+                        <img src="images/photo2.jpg" alt="DNS记录">
+                    </div>
+                </div>
+                <div class="photo-wrapper">
+                    <div class="photo">
+                        <img src="images/photo3.jpg" alt="项目部署">
+                    </div>
+                </div>
+                <div class="photo-wrapper">
+                    <div class="photo">
+                        <img src="images/photo4.jpg" alt="最终成果">
+                    </div>
                 </div>
             </div>
-            <div class="photo-card">
-                <img src="images/photo2.jpg" alt="部署截图2">
-                <div class="photo-overlay">
-                    <div class="photo-title">DNS记录</div>
-                    <div class="photo-desc">CNAME配置完成</div>
-                </div>
+
+            <div class="orbit">
+                <div class="orbit-dot"></div>
+                <div class="orbit-dot"></div>
+                <div class="orbit-dot"></div>
+                <div class="orbit-dot"></div>
             </div>
-            <div class="photo-card">
-                <img src="images/photo3.jpg" alt="部署截图3">
-                <div class="photo-overlay">
-                    <div class="photo-title">项目部署</div>
-                    <div class="photo-desc">GitHub仓库设置</div>
-                </div>
-            </div>
-            <div class="photo-card">
-                <img src="images/photo4.jpg" alt="部署截图4">
-                <div class="photo-overlay">
-                    <div class="photo-title">最终成果</div>
-                    <div class="photo-desc">成功上线！</div>
-                </div>
+
+            <div class="center-content">
+                <div class="center-icon">🚀</div>
+                <div class="center-text">部署完成</div>
             </div>
         </div>
 
         <div class="info-section">
-            <h2>🚀 部署成就</h2>
+            <h2>🎆 炫酷效果</h2>
             <p>
-                恭喜！你的网站已成功部署到GitHub Pages，通过www.nftlize.com可以全球访问。
-                这个"一切皆可NFT"主题网站展示了艺术的无限可能，将你的创意数字化、唯一化、价值化。
-                从本地开发到云端部署，每一步都是成长的里程碑！
+                四张照片环绕中心旋转，自动播放，持续20秒一圈。鼠标悬停照片会放大并暂停旋转。
+                轨道粒子环绕，星星闪烁背景，营造宇宙太空般的视觉效果。
+                点击照片可以放大查看，体验流畅的3D动画效果。
             </p>
         </div>
 
         <div class="stats">
             <div class="stat">
-                <div class="stat-value">100%</div>
-                <div class="stat-label">部署成功率</div>
+                <div class="stat-value">4</div>
+                <div class="stat-label">展示照片</div>
             </div>
             <div class="stat">
-                <div class="stat-value">全球</div>
-                <div class="stat-label">CDN加速访问</div>
+                <div class="stat-value">20s</div>
+                <div class="stat-label">旋转周期</div>
             </div>
             <div class="stat">
-                <div class="stat-value">免费</div>
-                <div class="stat-label">GitHub Pages托管</div>
+                <div class="stat-value">∞</div>
+                <div class="stat-label">持续播放</div>
             </div>
             <div class="stat">
-                <div class="stat-value">HTTPS</div>
-                <div class="stat-label">自动安全加密</div>
+                <div class="stat-value">3D</div>
+                <div class="stat-label">立体效果</div>
             </div>
         </div>
 
         <div class="footer">
-            <p>🎨 一切皆可NFT，一切皆有价值</p>
-            <p>访问: <a href="http://www.nftlize.com">www.nftlize.com</a></p>
+            <p>🌐 一切皆可NFT，一切皆有价值</p>
+            <p>访问: <a href="/">www.nftlize.com</a></p>
             <p>Powered by OpenClaw | GitHub Pages</p>
         </div>
     </div>
 
     <script>
-        // Create floating particles
-        const particlesContainer = document.getElementById('particles');
-        for (let i = 0; i < 50; i++) {
-            const particle = document.createElement('div');
-            particle.className = 'particle';
-            particle.style.left = Math.random() * 100 + '%';
-            particle.style.top = Math.random() * 100 + '%';
-            particle.style.width = Math.random() * 10 + 5 + 'px';
-            particle.style.height = particle.style.width;
-            particle.style.animationDelay = Math.random() * 15 + 's';
-            particle.style.animationDuration = Math.random() * 10 + 15 + 's';
-            particlesContainer.appendChild(particle);
+        // Create stars
+        const starsContainer = document.getElementById('stars');
+        for (let i = 0; i < 200; i++) {
+            const star = document.createElement('div');
+            star.className = 'star';
+            star.style.left = Math.random() * 100 + '%';
+            star.style.top = Math.random() * 100 + '%';
+            star.style.width = Math.random() * 3 + 1 + 'px';
+            star.style.height = star.style.width;
+            star.style.animationDelay = Math.random() * 3 + 's';
+            starsContainer.appendChild(star);
         }
 
-        // Create fireworks
-        function createFirework() {
-            const firework = document.createElement('div');
-            firework.className = 'firework';
-            firework.innerHTML = '';
-
-            const colors = ['#ff0000', '#00ff00', '#0000ff', '#ffff00', '#ff00ff', '#00ffff', '#ffcc00', '#ff6600'];
-            const color = colors[Math.floor(Math.random() * colors.length)];
-
-            for (let i = 0; i < 30; i++) {
-                const angle = (i / 30) * Math.PI * 2;
-                const distance = 200 + Math.random() * 200;
-                const tx = Math.cos(angle) * distance + 'px';
-                const ty = Math.sin(angle) * distance + 'px';
-
-                const particle = document.createElement('div');
-                particle.className = 'firework-particle';
-                particle.style.background = color;
-                particle.style.left = '50%';
-                particle.style.top = '50%';
-                particle.style.setProperty('--tx', tx);
-                particle.style.setProperty('--ty', ty);
-                firework.appendChild(particle);
-            }
-
-            document.body.appendChild(firework);
-
-            setTimeout(() => {
-                firework.remove();
-            }, 2000);
-        }
-
-        // Fireworks on load
-        window.addEventListener('load', () => {
-            setTimeout(() => createFirework(), 500);
-            setTimeout(() => createFirework(), 1500);
-            setTimeout(() => createFirework(), 2500);
+        // Pause animation on hover
+        const ring = document.querySelector('.ring');
+        ring.addEventListener('mouseenter', () => {
+            ring.style.animationPlayState = 'paused';
         });
 
-        // Click to create firework
-        document.body.addEventListener('click', (e) => {
-            createFirework();
+        ring.addEventListener('mouseleave', () => {
+            ring.style.animationPlayState = 'running';
         });
     </script>
 </body>
