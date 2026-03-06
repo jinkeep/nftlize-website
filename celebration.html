@@ -510,6 +510,65 @@
             color: #ff00ff;
         }
 
+        /* Random names effect */
+        .name-bubble {
+            position: fixed;
+            pointer-events: none;
+            z-index: 1000;
+            padding: 15px 30px;
+            background: linear-gradient(135deg, rgba(0, 242, 234, 0.9), rgba(255, 0, 255, 0.9));
+            border-radius: 50px;
+            font-size: 24px;
+            font-weight: 700;
+            color: #fff;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 10px 30px rgba(0, 242, 234, 0.5);
+            animation: nameAppear 2s ease-out forwards;
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+        }
+
+        @keyframes nameAppear {
+            0% {
+                opacity: 0;
+                transform: translate(-50%, -50%) scale(0) rotate(0deg);
+            }
+            20% {
+                opacity: 1;
+                transform: translate(-50%, -50%) scale(1.2) rotate(180deg);
+            }
+            40% {
+                transform: translate(-50%, -50%) scale(1) rotate(360deg);
+            }
+            100% {
+                opacity: 0;
+                transform: translate(-50%, -50%) scale(0.8) translateY(-100px);
+            }
+        }
+
+        /* Click ripple effect */
+        .ripple {
+            position: fixed;
+            pointer-events: none;
+            z-index: 999;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(0, 242, 234, 0.8) 0%, rgba(255, 0, 255, 0.3) 50%, transparent 70%);
+            animation: rippleExpand 1s ease-out forwards;
+        }
+
+        @keyframes rippleExpand {
+            0% {
+                width: 0;
+                height: 0;
+                opacity: 1;
+            }
+            100% {
+                width: 300px;
+                height: 300px;
+                opacity: 0;
+            }
+        }
+
         @media (max-width: 768px) {
             h1 {
                 font-size: 36px;
@@ -625,6 +684,10 @@
                 轨道粒子环绕，星星闪烁背景，营造宇宙太空般的视觉效果。
                 点击照片可以放大查看，体验流畅的3D动画效果。
             </p>
+            <p style="margin-top: 20px; color: #00f2ea;">
+                <strong>✨ 新功能：</strong>点击屏幕任意位置，会触发波纹效果，
+                并随机弹出"大宝、小宝、爸爸、妈妈"四个名字，炫酷十足！
+            </p>
         </div>
 
         <div class="stats">
@@ -675,6 +738,51 @@
 
         ring.addEventListener('mouseleave', () => {
             ring.style.animationPlayState = 'running';
+        });
+
+        // Click to show random names
+        const names = ['大宝', '小宝', '爸爸', '妈妈'];
+        const colors = [
+            'linear-gradient(135deg, #ff0080, #7928ca)',
+            'linear-gradient(135deg, #00c6ff, #0072ff)',
+            'linear-gradient(135deg, #ff4b1f, #ff9068)',
+            'linear-gradient(135deg, #00ff88, #00ffcc)'
+        ];
+
+        document.body.addEventListener('click', (e) => {
+            // Create ripple effect
+            const ripple = document.createElement('div');
+            ripple.className = 'ripple';
+            ripple.style.left = e.clientX + 'px';
+            ripple.style.top = e.clientY + 'px';
+            ripple.style.transform = 'translate(-50%, -50%)';
+            document.body.appendChild(ripple);
+
+            setTimeout(() => {
+                ripple.remove();
+            }, 1000);
+
+            // Show 4 random names around click position
+            for (let i = 0; i < 4; i++) {
+                setTimeout(() => {
+                    const name = names[Math.floor(Math.random() * names.length)];
+                    const color = colors[Math.floor(Math.random() * colors.length)];
+
+                    const nameBubble = document.createElement('div');
+                    nameBubble.className = 'name-bubble';
+                    nameBubble.textContent = name;
+                    nameBubble.style.background = color;
+                    nameBubble.style.left = (e.clientX + (Math.random() - 0.5) * 400) + 'px';
+                    nameBubble.style.top = (e.clientY + (Math.random() - 0.5) * 400) + 'px';
+                    nameBubble.style.fontSize = (20 + Math.random() * 15) + 'px';
+
+                    document.body.appendChild(nameBubble);
+
+                    setTimeout(() => {
+                        nameBubble.remove();
+                    }, 2000);
+                }, i * 150);
+            }
         });
     </script>
 </body>
